@@ -1,6 +1,6 @@
 ### Трансформация полигональных моделей в воксельные
 
-| Скрипт | pyvista-voxelize.py | trimesh-voxelize.py | open3d-voxelize.py |
+| Скрипт | pyvista_voxelize.py | trimesh_voxelize.py | open3d_voxelize.py |
 | ------ | ------ | ------ | ------ |
 | Удалось запустить | да | да | да |
 | Сложность алгоритма | - | - | - |
