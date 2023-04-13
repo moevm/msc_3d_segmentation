@@ -1,7 +1,6 @@
 from scipy import ndimage
 import numpy as np
 import os
-import matplotlib
 import matplotlib.pyplot as plt
 from scipy.ndimage import maximum_filter, label
 from scipy.spatial.distance import cdist
@@ -11,7 +10,7 @@ def get_voxel_model(filename):
     mesh_path = get_absolute_path(filename)
     mesh = trimesh.load(mesh_path, force='mesh')
 
-    angel_voxel = mesh.voxelized(0.1)
+    angel_voxel = mesh.voxelized(0.5)
     return angel_voxel.matrix 
 
 def get_absolute_path(file_name):
@@ -107,7 +106,7 @@ def add_padding(arr, n):
 
 
 
-arr = get_voxel_model('rooster.obj')
+arr = get_voxel_model('sagrada-familia-complete.obj')
 
 arr = np.rot90(arr, k=1, axes=(0, 1))
 
