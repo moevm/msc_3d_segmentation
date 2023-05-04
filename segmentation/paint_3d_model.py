@@ -14,7 +14,7 @@ def get_voxel_model(filename):
     mesh_path = get_absolute_path(filename)
     mesh = trimesh.load(mesh_path, force='mesh')
 
-    angel_voxel = mesh.voxelized(0.5)
+    angel_voxel = mesh.voxelized(0.2)
 
     return angel_voxel 
 
@@ -58,14 +58,9 @@ def show_model(voxel_grid, arr):
     init_mesh.visual.vertex_colors = output_array
 
 
-    # s1 = trimesh.Scene()
-    # # s.add_geometry(mesh)
-    # s1.add_geometry(init_mesh)
-    # s1.show(resolution=(800, 600), flags={'axis': True})
-
     s = trimesh.Scene()
-    s.add_geometry(mesh)
-    # s.add_geometry(init_mesh)
+    # s.add_geometry(mesh)
+    s.add_geometry(init_mesh)
     s.show(resolution=(800, 600), flags={'axis': True})
 
 
@@ -87,13 +82,13 @@ def cluster_maxima(map):
     labeled_maxima_before, num_labels = label(mask)
     
     #костыль чтобы убрать внешнюю поверхность
-    # labeled_maxima = np.zeros_like(labeled_maxima_before)
-    # for i in range(labeled_maxima_before.shape[0]):
-    #     for j in range(labeled_maxima_before.shape[1]):    
-    #         if labeled_maxima_before[i][j] > 0 and labeled_maxima_before[i][j] < 2:
-    #             labeled_maxima[i][j] = 0
-    #         else:
-    #             labeled_maxima[i][j] = labeled_maxima_before[i][j]
+    labeled_maxima = np.zeros_like(labeled_maxima_before)
+    for i in range(labeled_maxima_before.shape[0]):
+        for j in range(labeled_maxima_before.shape[1]):    
+            if labeled_maxima_before[i][j] > 0 and labeled_maxima_before[i][j] < 2:
+                labeled_maxima[i][j] = 0
+            else:
+                labeled_maxima[i][j] = labeled_maxima_before[i][j]
 
     return labeled_maxima_before, mask
 
