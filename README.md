@@ -1,2 +1,10 @@
-# msc_kurlin
-Распознавание (сегментация и идентификация) объектов на 3d-моделях
+# Алгоритмы упрощения облаков точек
+## Пример упрощения с использованием алгоритма упрощения полигональных моделей с применением основных методов (basic_methods.py)
+![alt text](https://github.com/moevm/msc_3d_segmentation/blob/vorobev_denis_8310/images/original.jpg?raw=true)
+![alt text](https://github.com/moevm/msc_3d_segmentation/blob/vorobev_denis_8310/images/basic_methods.jpg?raw=true)
+## Пример упрощения с использованием метода геометрического упрощения 3D полигональных объектов (geometric_simplification _algorithm.py)
+![alt text](https://github.com/moevm/msc_3d_segmentation/blob/vorobev_denis_8310/images/original.jpg?raw=true)
+![alt text](https://github.com/moevm/msc_3d_segmentation/blob/vorobev_denis_8310/images/geometric_simplification.jpg?raw=true)
+## Пример упрощения с использованием метода геометрического упрощения 3D полигональных объектов (geometric_simplification _algorithm.py)
+![alt text](https://github.com/moevm/msc_3d_segmentation/blob/vorobev_denis_8310/images/original.jpg?raw=true)
+![alt text](https://github.com/moevm/msc_3d_segmentation/blob/vorobev_denis_8310/images/iterative_method.jpg?raw=true)
