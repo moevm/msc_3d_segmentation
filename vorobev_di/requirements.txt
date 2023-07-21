@@ -1,0 +1,3 @@
+numpy==1.21.6
+plyfile==0.9
+scipy==1.7.3
