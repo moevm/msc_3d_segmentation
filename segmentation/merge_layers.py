@@ -28,7 +28,7 @@ def get_voxel_model(filename):
     mesh = trimesh.load(mesh_path, force='mesh')
 
     print("got model")
-    angel_voxel = mesh.voxelized(0.5)
+    angel_voxel = mesh.voxelized(0.2)
     print("voxelized model")
     
     return angel_voxel 
@@ -107,7 +107,7 @@ def cluster_maxima(map):
 
     # compute the coordinates of the maxima
     coordinates = np.argwhere(labeled_maxima > 0)
-    threshold = 5
+    threshold = 1
 
     # check the distances between each pair of maxima and merge clusters if their distance is below the threshold
     for i in range(len(coordinates)):
@@ -207,28 +207,63 @@ def print_layer(before, after):
     axarr[1].imshow(after, cmap = heatmap)
     plt.show()
 
+def merge_maximas(a):
+    threshold = 2
+
+    for x in range(len(a) - 1):
+        for y in range(len(a[0])):
+            for z in range(len(a[0][0])):
+                for dy in range(-threshold, threshold+1):
+                    for dz in range(-threshold, threshold+1):
+                        if 0 <= y+dy < len(a[0]) and 0 <= z+dz < len(a[0][0]):
+                            if a[x][y][z] == 0 or a[x+1][y+dy][z+dz] == 0:
+                                continue
+                            a[x+1][y+dy][z+dz] = a[x][y][z]
+    return a
 
 
 model = get_voxel_model(file)
 
 arr = model.matrix
 
-# arr = np.rot90(arr, k=1, axes=(0, 1))
+arr = np.rot90(arr, k=1, axes=(0, 1))
 # print_voxels(arr)
+
+arr_maxes = []
+
+maps = []
+for a in arr:
+    map = euclidean_distance_map(a)
+    maps.append(map)
+    clusters, mask = cluster_maxima(map)
+
+    # print_layer(map, clusters)
+
+    # segments = region_growth(map, clusters)
+
+    # res_arr.append(segments)
+
+    arr_maxes.append(clusters)
+
+
+arr_maxes = np.array(arr_maxes)
+print_voxels(arr_maxes)
+
+
+arr_maxes = merge_maximas(arr_maxes)
+print_voxels(arr_maxes)
+
 
 res_arr = []
 
-for a in arr:
-    map = euclidean_distance_map(a)
-    clusters, mask = cluster_maxima(map)
-
-    print_layer(map, clusters)
-
-    segments = region_growth(map, clusters)
-
+for (a, map) in zip(arr_maxes, maps):
+    segments = region_growth(map, a)
+    
     res_arr.append(segments)
 
 res_arr = np.array(res_arr)
+
+
 # res_arr = np.rot90(res_arr, k=-1, axes=(1, 2))
 
 
@@ -236,7 +271,7 @@ res_arr = np.array(res_arr)
 # res_arr = merge_segments(res_arr)
 # print("после мержа:", res_arr.shape)
 
-# print_voxels(res_arr)
+print_voxels(res_arr)
 
 
 res_model = make_voxel_model_from_array(arr)
