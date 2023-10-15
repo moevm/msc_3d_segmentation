@@ -11,15 +11,15 @@ from scipy.interpolate import interp1d
 
 heatmap = 'nipy_spectral'
 
-# file = 'sagrada-familia-la-passio.STL'
-# file = 'torres-sagrada-familia.STL'
-# file = 'sagrada-familia-nave-sacristias.STL'
-# file = 'sagrada-familia-la-gloria.STL'
+# file = 'sagrada-familia-la-passio.STL' # 0.1
+# file = 'torres-sagrada-familia.STL' # 0.06 do not rotate
+# file = 'sagrada-familia-nave-sacristias.STL' # 0.12
+# file = 'sagrada-familia-la-gloria.STL' # 0.15
 
-file = 'sagrada-familia-complete.obj'
-# file = 'taj-mahal.stl'
-# file = 'st-basils.stl'
-# file = 'notre-dame.stl'
+# file = 'sagrada-familia-complete.obj' # 0.5
+file = 'taj-mahal.stl' # 4
+# file = 'st-basils.stl' # 0.005
+# file = 'notre-dame.stl' # 0.8 do not rotate
 
 
 def get_voxel_model(filename):
@@ -28,7 +28,7 @@ def get_voxel_model(filename):
     mesh = trimesh.load(mesh_path, force='mesh')
 
     print("got model")
-    angel_voxel = mesh.voxelized(0.2)
+    angel_voxel = mesh.voxelized(3)
     print("voxelized model")
     
     return angel_voxel 
