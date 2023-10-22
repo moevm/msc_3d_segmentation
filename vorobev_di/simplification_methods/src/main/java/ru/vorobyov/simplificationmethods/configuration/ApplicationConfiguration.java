@@ -1,6 +1,7 @@
 package ru.vorobyov.simplificationmethods.configuration;
 
-import ru.vorobyov.simplificationmethods.service.MongoModels;
+import ru.vorobyov.simplificationmethods.service.mongo.MongoModels;
+import ru.vorobyov.simplificationmethods.service.python.PythonMethods;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,5 +28,9 @@ public class ApplicationConfiguration {
 
     public static String getModelProperty(ConfigurationFields field, MongoModels collection) {
         return props.getProperty(field.getFieldName() + collection.getFieldName());
+    }
+
+    public static String getMethodProperty(ConfigurationFields field, PythonMethods methods) {
+        return props.getProperty(field.getFieldName() + methods.getMethodPath());
     }
 }

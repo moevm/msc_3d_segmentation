@@ -1,5 +1,7 @@
 numpy==1.21.6
 plyfile==0.9
+scipy==1.7.3
+plyfile==0.9
 
 pymongo~=4.5.0
 open3d~=0.17.0

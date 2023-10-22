@@ -23,4 +23,4 @@ points_list = [{"x": float(x), "y": float(y), "z": float(z)} for x, y, z in orig
 # удаление старых данных
 collection.drop()
 # Вставка данных в коллекцию
-result = collection.insert_many(points_list)
+collection.insert_many(points_list)

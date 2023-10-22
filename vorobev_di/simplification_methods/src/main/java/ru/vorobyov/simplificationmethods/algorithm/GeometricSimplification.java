@@ -1,13 +1,13 @@
 package ru.vorobyov.simplificationmethods.algorithm;
 
 import org.bson.Document;
-import ru.vorobyov.simplificationmethods.service.MongoModels;
-import ru.vorobyov.simplificationmethods.service.MongoService;
+import ru.vorobyov.simplificationmethods.service.mongo.MongoModels;
+import ru.vorobyov.simplificationmethods.service.mongo.MongoService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GeometricSimplification {
+public class GeometricSimplification implements Algorithm{
     private final int divisionsNum;
     private final MongoService mongoService;
 
@@ -16,6 +16,7 @@ public class GeometricSimplification {
         mongoService = new MongoService();
     }
 
+    @Override
     public void process(){
         List<float[]> vertices = mongoService.getAllPoints(MongoModels.INPUT);
 
@@ -23,7 +24,7 @@ public class GeometricSimplification {
         List<float[][]> divisionBounds = calculateDivisionBounds(boundingBox);
         List<Document> strongPoints = calculateStrongPoints(vertices, divisionBounds);
 
-        mongoService.saveAllPoints(MongoModels.OUTPUT_GEOMETRIC_METHOD, strongPoints);
+        mongoService.saveAllPoints(MongoModels.OUTPUT, strongPoints);
     }
 
     private List<float[]> createBoundingBox(List<float[]> vertices){
